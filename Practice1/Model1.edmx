@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище VoencomModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Prizivnik">
+          <Key>
+            <PropertyRef Name="ID_prizivnik" />
+          </Key>
+          <Property Name="ID_prizivnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Middlename" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Spisokprizivnokov">
+          <Key>
+            <PropertyRef Name="ID_Spisokprizivnokov" />
+          </Key>
+          <Property Name="ID_Spisokprizivnokov" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prizivnik_ID" Type="int" />
+          <Property Name="zrenie_ID" Type="int" />
+          <Property Name="ploskostopie_ID" Type="int" />
+          <Property Name="zelanie_ID" Type="int" />
+          <Property Name="perelom_ID" Type="int" />
+          <Property Name="zdorovie_ID" Type="int" />
+          <Property Name="Vozrast" Type="int" Nullable="false" />
+          <Property Name="Rost" Type="int" Nullable="false" />
+          <Property Name="AO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Ychitsa" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zdorovie">
+          <Key>
+            <PropertyRef Name="ID_zdorovie" />
+          </Key>
+          <Property Name="ID_zdorovie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zdorovie" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Spisokpri__Prizi__681373AD">
+          <End Role="Prizivnik" Type="Self.Prizivnik" Multiplicity="0..1" />
+          <End Role="Spisokprizivnokov" Type="Self.Spisokprizivnokov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prizivnik">
+              <PropertyRef Name="ID_prizivnik" />
+            </Principal>
+            <Dependent Role="Spisokprizivnokov">
+              <PropertyRef Name="Prizivnik_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spisokpri__zdoro__6CD828CA">
+          <End Role="zdorovie" Type="Self.zdorovie" Multiplicity="0..1" />
+          <End Role="Spisokprizivnokov" Type="Self.Spisokprizivnokov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zdorovie">
+              <PropertyRef Name="ID_zdorovie" />
+            </Principal>
+            <Dependent Role="Spisokprizivnokov">
+              <PropertyRef Name="zdorovie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище VoencomModelContainer">
+          <EntitySet Name="Prizivnik" EntityType="Self.Prizivnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spisokprizivnokov" EntityType="Self.Spisokprizivnokov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zdorovie" EntityType="Self.zdorovie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Spisokpri__Prizi__681373AD" Association="Self.FK__Spisokpri__Prizi__681373AD">
+            <End Role="Prizivnik" EntitySet="Prizivnik" />
+            <End Role="Spisokprizivnokov" EntitySet="Spisokprizivnokov" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spisokpri__zdoro__6CD828CA" Association="Self.FK__Spisokpri__zdoro__6CD828CA">
+            <End Role="zdorovie" EntitySet="zdorovie" />
+            <End Role="Spisokprizivnokov" EntitySet="Spisokprizivnokov" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VoencomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Prizivnik">
+          <Key>
+            <PropertyRef Name="ID_prizivnik" />
+          </Key>
+          <Property Name="ID_prizivnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Spisokprizivnokov" Relationship="Self.FK__Spisokpri__Prizi__681373AD" FromRole="Prizivnik" ToRole="Spisokprizivnokov" />
+        </EntityType>
+        <EntityType Name="Spisokprizivnokov">
+          <Key>
+            <PropertyRef Name="ID_Spisokprizivnokov" />
+          </Key>
+          <Property Name="ID_Spisokprizivnokov" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prizivnik_ID" Type="Int32" />
+          <Property Name="zrenie_ID" Type="Int32" />
+          <Property Name="ploskostopie_ID" Type="Int32" />
+          <Property Name="zelanie_ID" Type="Int32" />
+          <Property Name="perelom_ID" Type="Int32" />
+          <Property Name="zdorovie_ID" Type="Int32" />
+          <Property Name="Vozrast" Type="Int32" Nullable="false" />
+          <Property Name="Rost" Type="Int32" Nullable="false" />
+          <Property Name="AO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ychitsa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Prizivnik" Relationship="Self.FK__Spisokpri__Prizi__681373AD" FromRole="Spisokprizivnokov" ToRole="Prizivnik" />
+          <NavigationProperty Name="zdorovie" Relationship="Self.FK__Spisokpri__zdoro__6CD828CA" FromRole="Spisokprizivnokov" ToRole="zdorovie" />
+        </EntityType>
+        <EntityType Name="zdorovie">
+          <Key>
+            <PropertyRef Name="ID_zdorovie" />
+          </Key>
+          <Property Name="ID_zdorovie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zdorovie1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Spisokprizivnokov" Relationship="Self.FK__Spisokpri__zdoro__6CD828CA" FromRole="zdorovie" ToRole="Spisokprizivnokov" />
+        </EntityType>
+        <Association Name="FK__Spisokpri__Prizi__681373AD">
+          <End Role="Prizivnik" Type="Self.Prizivnik" Multiplicity="0..1" />
+          <End Role="Spisokprizivnokov" Type="Self.Spisokprizivnokov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prizivnik">
+              <PropertyRef Name="ID_prizivnik" />
+            </Principal>
+            <Dependent Role="Spisokprizivnokov">
+              <PropertyRef Name="Prizivnik_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spisokpri__zdoro__6CD828CA">
+          <End Role="zdorovie" Type="Self.zdorovie" Multiplicity="0..1" />
+          <End Role="Spisokprizivnokov" Type="Self.Spisokprizivnokov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zdorovie">
+              <PropertyRef Name="ID_zdorovie" />
+            </Principal>
+            <Dependent Role="Spisokprizivnokov">
+              <PropertyRef Name="zdorovie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VoencomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Prizivnik" EntityType="Self.Prizivnik" />
+          <EntitySet Name="Spisokprizivnokov" EntityType="Self.Spisokprizivnokov" />
+          <EntitySet Name="zdorovie" EntityType="Self.zdorovie" />
+          <AssociationSet Name="FK__Spisokpri__Prizi__681373AD" Association="Self.FK__Spisokpri__Prizi__681373AD">
+            <End Role="Prizivnik" EntitySet="Prizivnik" />
+            <End Role="Spisokprizivnokov" EntitySet="Spisokprizivnokov" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spisokpri__zdoro__6CD828CA" Association="Self.FK__Spisokpri__zdoro__6CD828CA">
+            <End Role="zdorovie" EntitySet="zdorovie" />
+            <End Role="Spisokprizivnokov" EntitySet="Spisokprizivnokov" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VoencomModelContainer" CdmEntityContainer="VoencomEntities">
+          <EntitySetMapping Name="Prizivnik">
+            <EntityTypeMapping TypeName="VoencomModel.Prizivnik">
+              <MappingFragment StoreEntitySet="Prizivnik">
+                <ScalarProperty Name="ID_prizivnik" ColumnName="ID_prizivnik" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spisokprizivnokov">
+            <EntityTypeMapping TypeName="VoencomModel.Spisokprizivnokov">
+              <MappingFragment StoreEntitySet="Spisokprizivnokov">
+                <ScalarProperty Name="ID_Spisokprizivnokov" ColumnName="ID_Spisokprizivnokov" />
+                <ScalarProperty Name="Prizivnik_ID" ColumnName="Prizivnik_ID" />
+                <ScalarProperty Name="zrenie_ID" ColumnName="zrenie_ID" />
+                <ScalarProperty Name="ploskostopie_ID" ColumnName="ploskostopie_ID" />
+                <ScalarProperty Name="zelanie_ID" ColumnName="zelanie_ID" />
+                <ScalarProperty Name="perelom_ID" ColumnName="perelom_ID" />
+                <ScalarProperty Name="zdorovie_ID" ColumnName="zdorovie_ID" />
+                <ScalarProperty Name="Vozrast" ColumnName="Vozrast" />
+                <ScalarProperty Name="Rost" ColumnName="Rost" />
+                <ScalarProperty Name="AO" ColumnName="AO" />
+                <ScalarProperty Name="Ychitsa" ColumnName="Ychitsa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zdorovie">
+            <EntityTypeMapping TypeName="VoencomModel.zdorovie">
+              <MappingFragment StoreEntitySet="zdorovie">
+                <ScalarProperty Name="ID_zdorovie" ColumnName="ID_zdorovie" />
+                <ScalarProperty Name="zdorovie1" ColumnName="zdorovie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
